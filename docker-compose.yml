@@ -1,0 +1,22 @@
+
+services:
+  n8n:
+    # linux
+    #image: n8nio/n8n:%N8N_VERSION%
+    # windows
+    image: n8nio/n8n:${N8N_VERSION}
+    ports:
+      - "5678:5678"
+    environment:
+      - N8N_BASIC_AUTH_ACTIVE=true
+      - N8N_BASIC_AUTH_USER=admin
+      - N8N_BASIC_AUTH_PASSWORD=J263726a
+      - N8N_ENCRYPTION_KEY=%%N8N_ENCRYPTION_KEY%%
+      - GENERIC_TIMEZONE=%%GENERIC_TIMEZONE%%
+    volumes:
+      - n8n_data:/home/node/.n8n
+      - ./local-files:/files
+    restart: unless-stopped
+
+volumes:
+  n8n_data:
